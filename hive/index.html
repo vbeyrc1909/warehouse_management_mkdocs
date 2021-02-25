@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Hive MQ - VB#1909 Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Hive MQ";
+    var mkdocs_page_input_path = "hive.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> VB#1909 Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../intro/">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ubuntu/">Ubuntu 18.04</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ros/">ROS Melodic and Move It!</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/">Python 2.7</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../google/">Google App Scripting</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Hive MQ</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../implementation/">Implementation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ur5_1/">UR5_1</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ur5_2/">UR5_2</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ros_iot/">ROS IOT Bridge</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../iot/">IOT</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">VB#1909 Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Hive MQ</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="mqtt-protocol">MQTT Protocol</h1>
+<ul>
+<li>
+<p>MQTT stands for Message Queue Telemetry Transport.</p>
+</li>
+<li>
+<p>It is a publish/subscribe, extremely simple and lightweight messaging protocol, designed for constrained devices and low-bandwidth, high-latency or unreliable networks. Let us look into this publisher and subscriber pattern which is analogous to a server-client communication.</p>
+</li>
+<li>
+<p>The publisher subscriber model allows MQTT clients to communicate one-to-one, one-to-many and many-to-one.</p>
+</li>
+<li>
+<p>MQTT Publisher: In a MQTT Protocol, the publisher acts as a server who is used to 'publish' messages or here, topics to the client side through a broker.</p>
+</li>
+<li>
+<p>MQTT Topics: MQTT Topic refers to an UTF-8 string that the broker uses to filter messages for each connected client. The topic consists of one or more levels. Each 'topic level' is separated by a forward slash which is known as a topic separator</p>
+</li>
+<li>
+<p>MQTT Broker: The MQTT broker is primarily responsible for receiving all messages, filtering the messages, decide who is interested in them and then publishing the message to all subscribed clients. There are various MQTT brokers available online which we will be looking into detail further</p>
+</li>
+<li>
+<p>MQTT Subscriber: The MQTT subscriber 'subscribes' to topic published on to the broker by the publisher. It acts as a client for receiving and generating a record of the messages published.</p>
+</li>
+<li>
+<p>To make sure of the 'Quality' of messages published by MQTT Publisher, we have a parameter called Quality of Service (QoS)</p>
+</li>
+<li>QoS0: The publication is sent but there is no confirmation</li>
+<li>QoS1: This ensures that the message is sent atleast once but duplicates may be received</li>
+<li>QoS2: This is the most bandwidth consuming mode, but the most reliable since duplicates are controlled by making sure message is sent only once.</li>
+</ul>
+<h1 id="hivemq">HiveMQ</h1>
+<ul>
+<li>
+<p>It is clear from the previous lessons that MQTT is a client server publish/subscribe messaging transport protocol. Now the central communication point is the MQTT broker, it is responsible of dispatching all messages between the senders and the receivers.</p>
+</li>
+<li>
+<p>There are different online MQTT broker available for eg. Mosquitto, emqx.io, Flespi, HiveMQ, MoQiatto, Mosca etc. We will be working with HiveMQ.</p>
+</li>
+<li>For more information refer official documentation of <a href="https://www.hivemq.com/hivemq/mqtt-broker/">HiveMQ</a>.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../implementation/" class="btn btn-neutral float-right" title="Implementation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../google/" class="btn btn-neutral" title="Google App Scripting"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../google/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../implementation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

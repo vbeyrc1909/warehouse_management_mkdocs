@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>UR5_2 - VB#1909 Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "UR5_2";
+    var mkdocs_page_input_path = "ur5_2.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> VB#1909 Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../intro/">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ubuntu/">Ubuntu 18.04</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ros/">ROS Melodic and Move It!</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/">Python 2.7</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../google/">Google App Scripting</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../hive/">Hive MQ</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../implementation/">Implementation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ur5_1/">UR5_1</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">UR5_2</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#rospyinit_nodenode_move_ur5_2-anonymoustrue">rospy.init_node('node_move_ur5_2', anonymous=True)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-camera">Class Camera:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#selfbridge-cvbridge">self.bridge = CvBridge()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-callbackselfdata">def callback(self,data):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cv_image-selfbridgeimgmsg_to_cv2data-bgr8">cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rowscolschannels-cv_imageshape">(rows,cols,channels) = cv_image.shape</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#self_computed_plan">self._computed_plan = ''</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#self_curr_state-self_robotget_current_state">self._curr_state = self._robot.get_current_state()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rp-rospkgrospack">rp = rospkg.RosPack()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-set_joint_anglesself-arg_list_joint_angles">def set_joint_angles(self, arg_list_joint_angles):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-hard_set_joint_anglesself-arg_list_joint_angles-arg_max_attempts1">def hard_set_joint_angles(self, arg_list_joint_angles, arg_max_attempts=1):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-go_to_poseself-arg_pose">def go_to_pose(self, arg_pose):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-hard_go_to_poseself-arg_pose-arg_max_attempts5">def hard_go_to_pose(self, arg_pose, arg_max_attempts=5):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-ee_cartesian_translationself-trans_x-trans_y-trans_z">def ee_cartesian_translation(self, trans_x, trans_y, trans_z):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-attach_boxself">def attach_box(self):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-detach_boxself">def detach_box(self):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-conveyor_beltpower">def conveyor_belt(power):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#def-pick_and_placebox">def pick_and_place(box):</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ros_iot/">ROS IOT Bridge</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../iot/">IOT</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">VB#1909 Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>UR5_2</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="ur5_2-python-script">UR5_2 Python Script</h1>
+<h2 id="rospyinit_nodenode_move_ur5_2-anonymoustrue">rospy.init_node('node_move_ur5_2', anonymous=True)</h2>
+<p>As part of the init_node() call, the default name of node is called. Names must be unique in ROS. 
+The anonymous name tag is added so that we don’t have to take care of using unique names for the node. <br/>
+In this function, the length of the package, the width of the vacuum gripper and the colours of packages are defined. <br/></p>
+<h2 id="class-camera">Class Camera:</h2>
+<h2 id="selfbridge-cvbridge">self.bridge = CvBridge()</h2>
+<p>CvBridge is a ROS library that provides an interface between ROS and OpenCV.  First, the publisher gets created. Further during initialisation the topic gets subscribed (using the callback method of the newly created object).</p>
+<h2 id="def-callbackselfdata">def callback(self,data):</h2>
+<h2 id="cv_image-selfbridgeimgmsg_to_cv2data-bgr8">cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")</h2>
+<h2 id="rowscolschannels-cv_imageshape">(rows,cols,channels) = cv_image.shape</h2>
+<p>First, the subscriber image is converted into an OpenCV image and on its success, its shape is accessed. The image is then converted from BGR to GRAY. Adaptive thresholding is the method where the threshold value is calculated for smaller regions and therefore, there will be different threshold values for different regions. The threshold value is a gaussian-weighted sum of the neighborhood values minus the constant C and the image is then converted back to BGR format. If the decoded value is less than 12, it returns null.
+ Then it detects the boxes as medicine, food and clothes on the basis of decoded image. If this is run successfully for all the packages, it gives a message “Packages Identified” on ROS. The rate is fixed at 10Hz and then the value for colour is published for each package in the 1st row and then it is stored in Inventory along with its colour, cost, and quantity details</p>
+<h2 id="self_computed_plan">self._computed_plan = ''</h2>
+<p>This Attribute to store computed trajectory by the planner</p>
+<h2 id="self_curr_state-self_robotget_current_state">self._curr_state = self._robot.get_current_state()</h2>
+<p>Current State of the Robot is needed to add box to planning scene</p>
+<h2 id="rp-rospkgrospack">rp = rospkg.RosPack()</h2>
+<p>This saves the trajectory of the path planned so as to speed up the process.</p>
+<h2 id="def-set_joint_anglesself-arg_list_joint_angles">def set_joint_angles(self, arg_list_joint_angles):</h2>
+<p>TDefines the angles that are set for the ur5_2 to pick the package and to place it into the bin</p>
+<h2 id="def-hard_set_joint_anglesself-arg_list_joint_angles-arg_max_attempts1">def hard_set_joint_angles(self, arg_list_joint_angles, arg_max_attempts=1):</h2>
+<p>Saves the angles for the further blocks to speed up the process</p>
+<h2 id="def-go_to_poseself-arg_pose">def go_to_pose(self, arg_pose):</h2>
+<p>Decides the destination for the pose</p>
+<h2 id="def-hard_go_to_poseself-arg_pose-arg_max_attempts5">def hard_go_to_pose(self, arg_pose, arg_max_attempts=5):</h2>
+<p>This function saves the decided destination of pose for future packages.</p>
+<h2 id="def-ee_cartesian_translationself-trans_x-trans_y-trans_z">def ee_cartesian_translation(self, trans_x, trans_y, trans_z):</h2>
+<p>This function computes a cartesian path connecting the initial pose to the final pose and makes the arm follow the computed path</p>
+<h2 id="def-attach_boxself">def attach_box(self):</h2>
+<h2 id="def-detach_boxself">def detach_box(self):</h2>
+<p>These functions return if the box was attached and detached successfully. </p>
+<h2 id="def-conveyor_beltpower">def conveyor_belt(power):</h2>
+<p>Sets the power source for the conveyor belt</p>
+<h2 id="def-pick_and_placebox">def pick_and_place(box):</h2>
+<p>This function first notes the position at which the box would have to be picked up from and then attaches to it and after distinguishing it, it is placed in one of the boxes according to its color. When the camera sees the package, it sets the speed of the conveyor belt to 0 and after dropping it in the bin, restarts the conveyor belt to receive the next package</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ros_iot/" class="btn btn-neutral float-right" title="ROS IOT Bridge">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ur5_1/" class="btn btn-neutral" title="UR5_1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ur5_1/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ros_iot/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
